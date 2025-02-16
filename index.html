@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Multiplayer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+</head>
+<body>
+<div id="username-container">
+    <h2>Enter your username</h2>
+    <input type="text" id="username-input" placeholder="Username">
+    <button onclick="setUsername()">Join</button>
+</div>
+
+<div id="lobby-container" style="display: none;">
+    <h2>Welcome, <span id="lobby-username"></span>!</h2>
+
+    <h3>Game Options</h3>
+    <button onclick="createGame()">Create Game</button>
+    <input type="text" id="game-code-input" placeholder="Enter Game Code">
+    <button onclick="joinGame()">Join Game</button>
+    <button onclick="exitLobby()">Exit</button>
+
+    <div id="chat-container">
+        <h3>Lobby Chat</h3>
+        <div id="chat-box" class="chat-box"></div> <!-- Auto-scroll enabled -->
+        <input type="text" id="chat-input" class="chat-input" placeholder="Type a message" onkeypress="handleEnter(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<div id="game-container" style="display: none;">
+    <h2 id="game-status">Waiting for opponent...</h2>
+    <h3>Game Code: <span id="game-code-display"></span></h3>
+
+    <div id="board">
+        <div class="cell" onclick="makeMove(0)"></div>
+        <div class="cell" onclick="makeMove(1)"></div>
+        <div class="cell" onclick="makeMove(2)"></div>
+        <div class="cell" onclick="makeMove(3)"></div>
+        <div class="cell" onclick="makeMove(4)"></div>
+        <div class="cell" onclick="makeMove(5)"></div>
+        <div class="cell" onclick="makeMove(6)"></div>
+        <div class="cell" onclick="makeMove(7)"></div>
+        <div class="cell" onclick="makeMove(8)"></div>
+    </div>
+
+    <h3 id="turn-info"></h3>
+
+    <button id="rematch-btn" style="display: none;" onclick="requestRematch()">Rematch</button>
+    <button id="exit-btn" onclick="exitGame()">Exit Game</button>
+    <button id="return-lobby-btn" onclick="returnToLobby()">Return to Lobby</button> <!-- 🔹 New Button -->
+
+    <div id="game-chat-container">
+        <h3>Game Chat</h3>
+        <div id="game-chat-box" class="chat-box"></div>
+        <input type="text" id="game-chat-input" class="chat-input" placeholder="Type a message" onkeypress="handleGameEnter(event)">
+        <button onclick="sendGameMessage()">Send</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
